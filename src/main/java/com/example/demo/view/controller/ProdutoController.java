@@ -2,6 +2,7 @@ package com.example.demo.view.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,7 @@ public class ProdutoController {
 		ModelMapper mapper = new ModelMapper();
 		
 		List<ProdutoResponse> resposta = produtos.stream()
-				.map(produtoDTO -> mapper.map(produtoDTO, ProdutoResponse.class))
-				.toList();
+				.map(produtoDTO -> mapper.map(produtoDTO, ProdutoResponse.class)).collect(Collectors.toList());
 		
 		return new ResponseEntity<>(resposta, HttpStatus.OK);
 	}
